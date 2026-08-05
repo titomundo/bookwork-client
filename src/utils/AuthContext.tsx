@@ -31,12 +31,16 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     })
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem("token", data.access_token);
-      });
+        if (data.error) {
+          console.log("Invalid credentials");
+          return;
+        }
 
-    setIsAuthenticated(true);
-    setIsAdmin(true);
-    setUser({ name: "user" });
+        localStorage.setItem("token", data.access_token);
+        setIsAuthenticated(true);
+        setIsAdmin(true);
+        setUser({ name: "user" });
+      });
   };
 
   const logout = () => {

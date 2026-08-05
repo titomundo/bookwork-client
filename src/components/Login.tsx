@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
+  const navigate = useNavigate();
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(email, password);
+
+    if (isAuthenticated) {
+      navigate("/dashboard");
+    }
   };
 
   return (
