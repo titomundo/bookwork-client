@@ -1,11 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./components/Login";
-import { Profile } from "./components/Profile";
+import Login from "./pages/Login";
+import { Profile } from "./pages/Profile";
 import { Layout } from "./components/Layout";
 
 import "./App.css";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
-import { Dashboard } from "./components/Dashboard";
+import { Dashboard } from "./pages/Dashboard";
+import { Businesses } from "./pages/Businesses";
+import { Reservations } from "./pages/Reservations";
+import { Locations } from "./pages/Locations";
+import { Users } from "./pages/Users";
 
 const App = () => {
   return (
@@ -20,6 +24,18 @@ const App = () => {
             </Route>
             <Route path="/profile" element={<ProtectedRoute />}>
               <Route path="" element={<Profile />}></Route>
+            </Route>
+            <Route path="/businesses" element={<ProtectedRoute />}>
+              <Route path="" element={<Businesses />}></Route>
+            </Route>
+            <Route path="/locations" element={<ProtectedRoute />}>
+              <Route path="" element={<Locations />}></Route>
+            </Route>
+            <Route path="/reservations" element={<ProtectedRoute />}>
+              <Route path="" element={<Reservations />}></Route>
+            </Route>
+            <Route path="/users" element={<ProtectedRoute />}>
+              <Route path="" element={<Users />}></Route>
             </Route>
           </Route>
         </Routes>
