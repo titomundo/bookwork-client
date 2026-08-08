@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
+import { TitleBar } from "../components/TitleBar";
 
 type Business = {
   id: string | null;
@@ -41,7 +42,7 @@ export function Businesses() {
   }, [token]);
   return (
     <div className="w-full h-full">
-      <h1 className="font-semibold text-left text-2xl pl-1 pb-6">Businesses</h1>
+      <TitleBar title="Businesses" />
       <div className="flex gap-3 w-full">
         {businesses.map((e) => (
           <div className="text-sm bg-gray-100 border border-gray-200 px-3 py-3 rounded-md text-left" key={e.id}>

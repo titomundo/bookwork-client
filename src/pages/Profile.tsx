@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { useEffect } from "react";
+import { TitleBar } from "../components/TitleBar";
 
 type User = {
   id: string | null;
@@ -43,7 +44,7 @@ export function Profile() {
 
   return (
     <div>
-      <h1>User Profile</h1>
+      <TitleBar title="Profile" />
       {user ? (
         <dl>
           <div className="flex gap-2">
