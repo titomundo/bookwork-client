@@ -6,7 +6,7 @@ export function Sidebar() {
     "py-1 px-2 bg-emerald-700/80 text-gray-100 font-semibold rounded-md";
 
   return (
-    <div className="p-6 text-left bg-gray-100 h-full">
+    <div className="p-6 text-left bg-gray-100 h-full border-r border-r-gray-200">
       <h1 className="font-semibold text-lg text-center">Bookworm</h1>
       <ul className="flex flex-col gap-3 my-8 text-sm">
         <li>

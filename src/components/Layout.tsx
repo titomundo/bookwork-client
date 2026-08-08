@@ -11,7 +11,7 @@ export function Layout() {
           <Sidebar />
         </div>
         <div className="col-span-5">
-          <div className="h-full p-6">
+          <div className="h-full px-8 py-6">
             <Outlet />
           </div>
         </div>
