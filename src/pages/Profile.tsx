@@ -27,7 +27,16 @@ export function Profile() {
       })
         .then((response) => response.json())
         .then((data) => {
+          if (data.msg) {
+            console.log("Invalid credentials");
+            return;
+          }
+
           setUser(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
     fetchData();
@@ -36,7 +45,7 @@ export function Profile() {
   return (
     <div>
       <h1>User Profile</h1>
-      {user && (
+      {user ? (
         <dl>
           <div className="flex gap-2">
             <dt>User: </dt>
@@ -51,7 +60,7 @@ export function Profile() {
             <dd>{user.is_admin ? "Admin" : "Employee"}</dd>
           </div>
         </dl>
-      )}
+      ) : null}
     </div>
   );
 }
