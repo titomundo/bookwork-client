@@ -41,7 +41,7 @@ export function Businesses() {
     fetchData();
   }, [token]);
   return (
-    <div className="w-full h-full">
+    <div className="">
       <TitleBar title="Businesses" />
       <div className="flex gap-3 w-full">
         {businesses.map((e) => (
