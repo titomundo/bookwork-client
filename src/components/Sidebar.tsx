@@ -3,7 +3,7 @@ import { Logout } from "./Logout";
 
 export function Sidebar() {
   const active =
-    "py-1 px-2 bg-emerald-700/80 text-gray-100 font-semibold rounded-md";
+    "py-1 px-3 ml-1 bg-emerald-700/80 text-gray-100 font-semibold rounded-md";
 
   return (
     <div className="p-6 text-left bg-gray-100 h-full border-r border-r-gray-200">
