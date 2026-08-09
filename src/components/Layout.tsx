@@ -10,7 +10,7 @@ export function Layout() {
         <div className="flex-none">
           <Sidebar />
         </div>
-        <div className="w-full h-full px-8 py-6">
+        <div className="w-full h-full">
           <Outlet />
         </div>
       </main>
