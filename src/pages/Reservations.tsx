@@ -69,71 +69,72 @@ export function Reservations() {
   return (
     <div>
       <TitleBar title="Reservations" />
+      <div className="px-3">
+        <div className="flex gap-2 text-left my-4 text-xs font-medium">
+          <input
+            id="startDate"
+            name="startDate"
+            type="date"
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+            className="border border-gray-200 rounded-md py-0.5 px-2"
+          />
+          <span className="py-1 font-semibold">to</span>
+          <input
+            id="endDate"
+            name="endDate"
+            type="date"
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+            className="border border-gray-200 rounded-md py-0.5 px-2"
+          />
+          <button
+            className="bg-sky-700/30 hover:bg-sky-700/40 text-sky-800 font-medium rounded-md py-0.5 px-2"
+            onClick={clearDate}
+          >
+            Clear filter
+          </button>
+        </div>
 
-      <div className="flex gap-2 text-left my-6 text-xs">
-        <input
-          id="startDate"
-          name="startDate"
-          type="date"
-          onChange={(e) => setStartDate(new Date(e.target.value))}
-          className="border border-gray-200 rounded-md py-1 px-2"
-        />
-        <span className="py-1 font-semibold">to</span>
-        <input
-          id="endDate"
-          name="endDate"
-          type="date"
-          onChange={(e) => setEndDate(new Date(e.target.value))}
-          className="border border-gray-200 rounded-md py-1 px-2"
-        />
-        <button
-          className="bg-sky-100 border border-gray-200 rounded-md py-1 px-2"
-          onClick={clearDate}
-        >
-          Clear filter
-        </button>
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
+          {reservations
+            .filter((e) => filterDate(e.date))
+            .map((e) => {
+              const date = new Date(e.date);
 
-      <div className="flex flex-col gap-2 w-full">
-        {reservations
-          .filter((e) => filterDate(e.date))
-          .map((e) => {
-            const date = new Date(e.date);
-
-            return (
-              <div
-                className="text-sm border border-gray-200 px-3 py-3 rounded-md text-right flex gap-1"
-                key={e.id}
-              >
-                <div>
-                  <h3 className="font-semibold">
-                    {format(date, "dd-MM-yyyy")}
-                  </h3>
-                  <h3 className="font-semibold">
-                    {format(date, "hh:mm aaaa")}
-                  </h3>
+              return (
+                <div
+                  className="text-xs border border-gray-200 px-3 py-3 rounded-md text-right flex gap-1"
+                  key={e.id}
+                >
+                  <div>
+                    <h3 className="font-semibold">
+                      {format(date, "dd-MM-yyyy")}
+                    </h3>
+                    <h3 className="font-semibold">
+                      {format(date, "hh:mm aaaa")}
+                    </h3>
+                  </div>
+                  <dl>
+                    <div className="flex gap-1">
+                      <dt className="text-right font-semibold">Client:</dt>
+                      <dd>{e.client_name}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="text-right font-semibold">Reason:</dt>
+                      <dd>{e.reason}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="text-right font-semibold">Status:</dt>
+                      <dd>{e.status}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="text-right font-semibold">Slot:</dt>
+                      <dd>{e.slot}</dd>
+                    </div>
+                  </dl>
                 </div>
-                <dl>
-                  <div className="flex gap-1">
-                    <dt className="text-right font-semibold">Client:</dt>
-                    <dd>{e.client_name}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="text-right font-semibold">Reason:</dt>
-                    <dd>{e.reason}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="text-right font-semibold">Status:</dt>
-                    <dd>{e.status}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="text-right font-semibold">Slot:</dt>
-                    <dd>{e.slot}</dd>
-                  </div>
-                </dl>
-              </div>
-            );
-          })}
+              );
+            })}
+        </div>
       </div>
     </div>
   );
