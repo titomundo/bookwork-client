@@ -40,6 +40,7 @@ export function Businesses() {
     }
     fetchData();
   }, [token]);
+
   return (
     <div className="">
       <TitleBar title="Businesses" />
