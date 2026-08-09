@@ -6,14 +6,12 @@ export function Layout() {
   return (
     <div className="w-full flex flex-col h-screen">
       {/* <Header /> */}
-      <main className="grid grid-cols-6 w-full flex-1 text-gray-700">
-        <div className="col-span-1">
+      <main className="flex w-full flex-1 text-gray-700">
+        <div className="flex-none">
           <Sidebar />
         </div>
-        <div className="col-span-5">
-          <div className="h-full px-8 py-6">
-            <Outlet />
-          </div>
+        <div className="w-full h-full px-8 py-6">
+          <Outlet />
         </div>
       </main>
     </div>
