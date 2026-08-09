@@ -7,7 +7,6 @@ import {
   UserIcon,
   UsersIcon,
 } from "@heroicons/react/16/solid";
-import { Users } from "../pages/Users";
 
 export function Sidebar() {
   const active =
