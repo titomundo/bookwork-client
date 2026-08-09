@@ -8,7 +8,7 @@ export function Sidebar() {
   return (
     <div className="p-6 text-left bg-gray-100 h-full border-r border-r-gray-200">
       <h1 className="font-semibold text-lg text-center">Bookworm</h1>
-      <ul className="flex flex-col gap-3 my-8 text-sm">
+      <ul className="flex flex-col gap-3 my-8 text-sm font-semibold">
         <li>
           <NavLink
             to="/dashboard"
