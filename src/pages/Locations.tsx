@@ -50,7 +50,6 @@ export function Locations() {
           <NavLink
             to="/locations/new"
             className="bg-sky-500/30 hover:bg-sky-500/40 text-sky-700 font-medium rounded-md py-0.5 px-2"
-            state={locations}
           >
             New Location
           </NavLink>
