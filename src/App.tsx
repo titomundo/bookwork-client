@@ -11,6 +11,7 @@ import { Reservations } from "./pages/Reservations";
 import { Locations } from "./pages/Locations";
 import { Users } from "./pages/Users";
 import { CreateBusinesses } from "./pages/CreateBusiness";
+import { CreateLocation } from "./pages/CreateLocation";
 
 const App = () => {
   return (
@@ -38,6 +39,10 @@ const App = () => {
             <Route path="/locations" element={<ProtectedRoute />}>
               <Route path="" element={<Locations />}></Route>
             </Route>
+            <Route path="/locations/new" element={<ProtectedRoute />}>
+              <Route path="" element={<CreateLocation />}></Route>
+            </Route>
+
 
             <Route path="/reservations" element={<ProtectedRoute />}>
               <Route path="" element={<Reservations />}></Route>
