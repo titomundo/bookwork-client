@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { format } from "date-fns";
+import { NavLink } from "react-router-dom";
 
 interface Reservation {
   id: string;
@@ -70,6 +71,14 @@ export function Reservations() {
     <div>
       <TitleBar title="Reservations" />
       <div className="px-3">
+        <div className="text-left my-4 text-xs font-medium">
+          <NavLink
+            to="/reservations/new"
+            className="bg-sky-500/30 hover:bg-sky-500/40 text-sky-700 rounded-md py-0.5 px-2"
+          >
+            New Reservation
+          </NavLink>
+        </div>
         <div className="flex gap-2 text-left my-4 text-xs font-medium">
           <input
             id="startDate"
@@ -87,7 +96,7 @@ export function Reservations() {
             className="border border-gray-200 rounded-md py-0.5 px-2"
           />
           <button
-            className="bg-sky-700/30 hover:bg-sky-700/40 text-sky-800 font-medium rounded-md py-0.5 px-2"
+            className="bg-cyan-600/30 hover:bg-cyan-600/40 text-cyan-700 rounded-md py-0.5 px-2"
             onClick={clearDate}
           >
             Clear filter
@@ -97,43 +106,39 @@ export function Reservations() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
           {reservations
             .filter((e) => filterDate(e.date))
-            .map((e) => {
-              const date = new Date(e.date);
-
-              return (
-                <div
-                  className="text-xs border border-gray-200 px-3 py-3 rounded-md text-right flex gap-1"
-                  key={e.id}
-                >
-                  <div>
-                    <h3 className="font-semibold">
-                      {format(date, "dd-MM-yyyy")}
-                    </h3>
-                    <h3 className="font-semibold">
-                      {format(date, "hh:mm aaaa")}
-                    </h3>
-                  </div>
-                  <dl>
-                    <div className="flex gap-1">
-                      <dt className="text-right font-semibold">Client:</dt>
-                      <dd>{e.client_name}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="text-right font-semibold">Reason:</dt>
-                      <dd>{e.reason}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="text-right font-semibold">Status:</dt>
-                      <dd>{e.status}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="text-right font-semibold">Slot:</dt>
-                      <dd>{e.slot}</dd>
-                    </div>
-                  </dl>
+            .map((e) => (
+              <div
+                className="text-xs border border-gray-200 px-3 py-3 rounded-md text-right flex gap-1"
+                key={e.id}
+              >
+                <div>
+                  <h3 className="font-semibold">
+                    {format(e.date, "dd-MM-yyyy")}
+                  </h3>
+                  <h3 className="font-semibold">
+                    {format(e.date, "hh:mm aaaa")}
+                  </h3>
                 </div>
-              );
-            })}
+                <dl>
+                  <div className="flex gap-1">
+                    <dt className="text-right font-semibold">Client:</dt>
+                    <dd>{e.client_name}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="text-right font-semibold">Reason:</dt>
+                    <dd>{e.reason}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="text-right font-semibold">Status:</dt>
+                    <dd>{e.status}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="text-right font-semibold">Slot:</dt>
+                    <dd>{e.slot}</dd>
+                  </div>
+                </dl>
+              </div>
+            ))}
         </div>
       </div>
     </div>
