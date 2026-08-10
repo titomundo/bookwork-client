@@ -10,6 +10,7 @@ import { Businesses } from "./pages/Businesses";
 import { Reservations } from "./pages/Reservations";
 import { Locations } from "./pages/Locations";
 import { Users } from "./pages/Users";
+import { CreateBusinesses } from "./pages/CreateBusiness";
 
 const App = () => {
   return (
@@ -22,18 +23,26 @@ const App = () => {
             <Route path="/dashboard" element={<ProtectedRoute />}>
               <Route path="" element={<Dashboard />}></Route>
             </Route>
+
             <Route path="/profile" element={<ProtectedRoute />}>
               <Route path="" element={<Profile />}></Route>
             </Route>
+
             <Route path="/businesses" element={<ProtectedRoute />}>
               <Route path="" element={<Businesses />}></Route>
             </Route>
+            <Route path="/businesses/new" element={<ProtectedRoute />}>
+              <Route path="" element={<CreateBusinesses />}></Route>
+            </Route>
+
             <Route path="/locations" element={<ProtectedRoute />}>
               <Route path="" element={<Locations />}></Route>
             </Route>
+
             <Route path="/reservations" element={<ProtectedRoute />}>
               <Route path="" element={<Reservations />}></Route>
             </Route>
+
             <Route path="/users" element={<ProtectedRoute />}>
               <Route path="" element={<Users />}></Route>
             </Route>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
+import { NavLink } from "react-router-dom";
 
 type Business = {
   id: string | null;
@@ -42,20 +43,30 @@ export function Businesses() {
   }, [token]);
 
   return (
-    <div className="">
+    <div>
       <TitleBar title="Businesses" />
-      <div className="flex gap-3 w-full">
-        {businesses.map((e) => (
-          <div
-            className="text-sm bg-gray-100 border border-gray-200 px-3 py-3 rounded-md text-left"
-            key={e.id}
+      <div className="px-3">
+        <div className="text-left my-4 text-xs font-medium">
+          <NavLink
+            to="/businesses/new"
+            className="bg-sky-500/30 hover:bg-sky-500/40 text-sky-700 font-medium rounded-md py-0.5 px-2"
           >
-            <h3 className="font-semibold">{e.name}</h3>
-            <p>{`Description: ${e.description}`}</p>
-            <p>{`E-mail: ${e.email}`}</p>
-            <p>{`Phone: ${e.phone_number}`}</p>
-          </div>
-        ))}
+            New Business
+          </NavLink>
+        </div>
+        <div className="flex gap-3 w-full">
+          {businesses.map((e) => (
+            <div
+              className="text-sm bg-gray-100 border border-gray-200 px-3 py-3 rounded-md text-left"
+              key={e.id}
+            >
+              <h3 className="font-semibold">{e.name}</h3>
+              <p>{`Description: ${e.description}`}</p>
+              <p>{`E-mail: ${e.email}`}</p>
+              <p>{`Phone: ${e.phone_number}`}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
