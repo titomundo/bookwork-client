@@ -2,14 +2,7 @@ import { TitleBar } from "../components/TitleBar";
 import { useAuth } from "../utils/AuthContext";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
-interface Location {
-  id: string;
-  name: string;
-  description: string;
-  capacity: number;
-  business_id: string;
-}
+import type { Location } from "../lib/definitions";
 
 export function Locations() {
   const [locations, setLocations] = useState<Array<Location>>([]);

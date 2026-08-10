@@ -2,14 +2,7 @@ import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-interface Location {
-  id: string;
-  name: string;
-  description: string;
-  capacity: number;
-  business_id: string;
-}
+import type { Location } from "../lib/definitions";
 
 export function CreateReservation() {
   const isAuthenticated = useAuth();

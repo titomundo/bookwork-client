@@ -2,14 +2,7 @@ import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-type Business = {
-  id: string;
-  name: string;
-  email: string;
-  description: string;
-  phone_number: string;
-};
+import type { Business } from "../lib/definitions";
 
 export function CreateLocation() {
   const isAuthenticated = useAuth();

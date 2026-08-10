@@ -2,14 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { useEffect } from "react";
 import { TitleBar } from "../components/TitleBar";
-
-type User = {
-  id: string | null;
-  first_name: string | null;
-  last_name: string | null;
-  is_admin: boolean | null;
-  email: string | null;
-};
+import type { User } from "../lib/definitions";
 
 export function Profile() {
   const [user, setUser] = useState<User>();

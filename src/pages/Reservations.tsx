@@ -3,17 +3,7 @@ import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { format } from "date-fns";
 import { NavLink } from "react-router-dom";
-
-interface Reservation {
-  id: string;
-  client_name: string;
-  date: string;
-  slot: number;
-  reason: string;
-  status: string;
-  user_id: string;
-  location_id: string;
-}
+import type { Reservation } from "../lib/definitions";
 
 export function Reservations() {
   const isAuthenticated = useAuth();
@@ -155,7 +145,7 @@ export function Reservations() {
                     Edit
                   </button>
                   <button className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-600 font-medium rounded-md py-0.5 px-6">
-                    Close 
+                    Close
                   </button>
                 </div>
               </div>

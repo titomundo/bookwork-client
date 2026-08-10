@@ -2,14 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { NavLink } from "react-router-dom";
-
-type Business = {
-  id: string | null;
-  name: string | null;
-  email: string | null;
-  description: string;
-  phone_number: string | null;
-};
+import type { Business } from "../lib/definitions";
 
 export function Businesses() {
   const [businesses, setBusinesses] = useState<Array<Business>>([]);
