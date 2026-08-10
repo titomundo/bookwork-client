@@ -41,6 +41,22 @@ export function Reservations() {
     setEndDate(null);
   }
 
+  function getStatus(status: string) {
+    const base = " rounded-md font-medium py-0 px-2 capitalize";
+    switch (status) {
+      case "pending":
+        return "bg-green-500/30 hover:bg-green-500/40 text-green-700" + base;
+      case "ongoing":
+        return "bg-amber-500/30 hover:bg-amber-500/40 text-amber-600" + base;
+      case "closed":
+        return "bg-stone-500/30 hover:bg-stone-500/40 text-stone-600" + base;
+      case "cancelled":
+        return "bg-red-500/30 hover:bg-red-500/40 text-red-500" + base;
+      default:
+        return "";
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       await fetch("http://127.0.0.1:5000/api/v1/reservations/", {
@@ -103,40 +119,45 @@ export function Reservations() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
           {reservations
             .filter((e) => filterDate(e.date))
             .map((e) => (
               <div
-                className="text-xs border border-gray-200 px-3 py-3 rounded-md text-right flex gap-1"
+                className="text-xs border border-gray-200 px-3 py-3 rounded-md text-left flex gap-1 md:flex-row flex-col"
                 key={e.id}
               >
-                <div>
-                  <h3 className="font-semibold">
-                    {format(e.date, "dd-MM-yyyy")}
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold">
+                    {format(e.date, "dd-MM-yyyy | hh:mm aaaa")}
                   </h3>
-                  <h3 className="font-semibold">
-                    {format(e.date, "hh:mm aaaa")}
-                  </h3>
+                  <dl>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Client:</dt>
+                      <dd>{e.client_name}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Reason:</dt>
+                      <dd>{e.reason}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Status:</dt>
+                      <dd className={getStatus(e.status)}>{e.status}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Slot:</dt>
+                      <dd>{e.slot}</dd>
+                    </div>
+                  </dl>
                 </div>
-                <dl>
-                  <div className="flex gap-1">
-                    <dt className="text-right font-semibold">Client:</dt>
-                    <dd>{e.client_name}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="text-right font-semibold">Reason:</dt>
-                    <dd>{e.reason}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="text-right font-semibold">Status:</dt>
-                    <dd>{e.status}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="text-right font-semibold">Slot:</dt>
-                    <dd>{e.slot}</dd>
-                  </div>
-                </dl>
+                <div className="grid grid-row-2 xs:grid-cols-2 gap-1 p-0.5">
+                  <button className="bg-lime-600/30 hover:bg-lime-600/40 text-lime-700 font-medium rounded-md py-0.5 px-6">
+                    Edit
+                  </button>
+                  <button className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-600 font-medium rounded-md py-0.5 px-6">
+                    Close 
+                  </button>
+                </div>
               </div>
             ))}
         </div>

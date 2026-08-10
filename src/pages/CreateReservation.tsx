@@ -1,6 +1,6 @@
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 interface Location {
@@ -15,6 +15,7 @@ export function CreateReservation() {
   const isAuthenticated = useAuth();
   const token = isAuthenticated ? localStorage.getItem("token") : null;
   const [locations, setLocations] = useState<Array<Location>>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -66,6 +67,8 @@ export function CreateReservation() {
         if (!response.ok) {
           throw new Error(response.status);
         }
+
+        navigate("/reservations");
       })
       .catch((error) => {
         console.log(error.message);
