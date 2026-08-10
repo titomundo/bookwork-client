@@ -1,4 +1,3 @@
-import { ProfileIcon } from "./icons/ProfileIcon";
 import { Link } from "react-router-dom";
 
 export function Header() {
@@ -14,12 +13,7 @@ export function Header() {
         to="/profile"
         className="py-1 px-3 inline font-semibold float-right rounded-md hover:bg-gray-400/40"
       >
-        <div className="flex gap-2">
-          <span>Profile</span>
-          <div className="">
-            <ProfileIcon />
-          </div>
-        </div>
+        <span>Profile</span>
       </Link>
     </header>
   );
