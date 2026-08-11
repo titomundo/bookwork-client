@@ -6,7 +6,7 @@ import type { User } from "../lib/definitions";
 
 export function Profile() {
   const [user, setUser] = useState<User>();
-  const isAuthenticated = useAuth();
+  const { isAuthenticated } = useAuth();
   const token = isAuthenticated ? localStorage.getItem("token") : null;
 
   useEffect(() => {
@@ -36,24 +36,28 @@ export function Profile() {
   }, [token]);
 
   return (
-    <div>
+    <>
       <TitleBar title="Profile" />
       {user ? (
-        <dl>
-          <div className="flex gap-2">
-            <dt>User: </dt>
-            <dd>{`${user.first_name} ${user.last_name}`}</dd>
+        <div className="flex justify-center">
+          <div className="w-lg my-4 text-left flex flex-col gap-2 text-sm bg-white shadow p-4 rounded-md">
+            <ul>
+              <li>
+                <span className="font-semibold">Username: </span>
+                {`${user.first_name} ${user.last_name}`}
+              </li>
+              <li>
+                <span className="font-semibold">E-mail: </span>
+                {user.email}
+              </li>
+              <li>
+                <span className="font-semibold">Role: </span>
+                {user.is_admin ? "Admin" : "Employee"}
+              </li>
+            </ul>
           </div>
-          <div className="flex gap-2">
-            <dt>E-mail: </dt>
-            <dd>{user.email}</dd>
-          </div>
-          <div className="flex gap-2">
-            <dt>Role: </dt>
-            <dd>{user.is_admin ? "Admin" : "Employee"}</dd>
-          </div>
-        </dl>
+        </div>
       ) : null}
-    </div>
+    </>
   );
 }

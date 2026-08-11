@@ -1,8 +1,9 @@
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getFormErrors } from "../lib/getFormErrors";
+import { _Link } from "../components/_Link";
 import type { Business } from "../lib/definitions";
 import type { FormError } from "../lib/definitions";
 
@@ -76,12 +77,7 @@ export function CreateLocation() {
       <TitleBar title="Create new location" />
       <div className="px-4 text-left">
         <div className="my-4 text-xs">
-          <NavLink
-            to="/locations/"
-            className="bg-yellow-500/30 hover:bg-yellow-500/40 text-yellow-700 font-medium rounded-md py-0.5 px-2"
-          >
-            Return to list
-          </NavLink>
+          <_Link text="Return to list" to="/locations/" />
         </div>
         <ul className="text-xs text-red-700">
           {errors.map((e) => (
@@ -91,71 +87,74 @@ export function CreateLocation() {
             </li>
           ))}
         </ul>
-        <form
-          className="w-lg my-4 text-left flex flex-col gap-2 text-sm "
-          onSubmit={handleSubmit}
-        >
-          <div className="flex flex-col">
-            <label className="font-medium ml-0.5" htmlFor="name">
-              Location name:
-            </label>
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="font-medium ml-0.5" htmlFor="capacity">
-              Capacity
-            </label>
-            <input
-              type="number"
-              name="capacity"
-              max={100}
-              min={1}
-              placeholder="Capacity"
-              className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50"
-              required
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="font-medium ml-0.5" htmlFor="business">
-              Business:
-            </label>
-            <select
-              name="business_id"
-              className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50 resize-none"
-              required
-            >
-              {businesses.map((e) => (
-                <option key={e.id} value={e.id}>
-                  {e.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="flex flex-col">
-            <label className="font-medium ml-0.5" htmlFor="description">
-              Description:
-            </label>
-            <textarea
-              name="description"
-              placeholder="Description"
-              className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50 resize-none"
-              rows={2}
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-sky-500/30 hover:bg-sky-500/40 text-sky-700 font-medium rounded-md py-0.5 px-2 mt-2"
+        <div className="flex justify-center text-gray-600">
+          <form
+            className="w-lg my-4 text-left flex flex-col gap-2 text-xs bg-white shadow p-4 rounded-md"
+            onSubmit={handleSubmit}
           >
-            Submit
-          </button>
-        </form>
+            <h3 className="text-base font-semibold">New Location</h3>
+            <div className="flex flex-col">
+              <label className="font-medium ml-0.5" htmlFor="name">
+                Location name:
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50"
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="font-medium ml-0.5" htmlFor="capacity">
+                Capacity
+              </label>
+              <input
+                type="number"
+                name="capacity"
+                max={100}
+                min={1}
+                placeholder="Capacity"
+                className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50"
+                required
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="font-medium ml-0.5" htmlFor="business">
+                Business:
+              </label>
+              <select
+                name="business_id"
+                className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50 resize-none"
+                required
+              >
+                {businesses.map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {e.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="flex flex-col">
+              <label className="font-medium ml-0.5" htmlFor="description">
+                Description:
+              </label>
+              <textarea
+                name="description"
+                placeholder="Description"
+                className="px-2 py-0.5 border rounded-md border-gray-200 bg-gray-50 resize-none"
+                rows={2}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-700 font-medium rounded-md py-2 text-center w-full block"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

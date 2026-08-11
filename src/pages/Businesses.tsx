@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { NavLink } from "react-router-dom";
+import { _Link } from "../components/_Link";
 import type { Business } from "../lib/definitions";
 
 export function Businesses() {
@@ -40,44 +41,39 @@ export function Businesses() {
       <TitleBar title="Businesses" />
       <div className="px-3">
         <div className="text-left my-4 text-xs font-medium">
-          <NavLink
-            to="/businesses/new"
-            className="bg-sky-500/30 hover:bg-sky-500/40 text-sky-700 font-medium rounded-md py-0.5 px-2"
-          >
-            New Business
-          </NavLink>
+          <_Link text="Create new business" to="/businesses/new" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
           {businesses.map((e) => (
             <div
-              className="text-xs border border-gray-200 bg-gray-50 px-3 py-3 rounded-md text-left flex gap-1 md:flex-row flex-col"
+              className="text-xs bg-white shadow px-4 py-4 rounded-md text-left flex flex-col gap-2"
               key={e.id}
             >
-              <div className="flex-1">
-                <dl>
-                  <div className="flex gap-2">
-                    <dt className="font-semibold">Name:</dt>
-                    <dd>{e.name}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="font-semibold">Description:</dt>
-                    <dd>{e.description}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="font-semibold">E-mail:</dt>
-                    <dd>{e.email}</dd>
-                  </div>
-                  <div className="flex gap-2">
-                    <dt className="font-semibold">Phone number:</dt>
-                    <dd>{e.phone_number}</dd>
-                  </div>
-                </dl>
+              <div className="text-gray-600">
+                <ul>
+                  <li>
+                    <span className="font-semibold">Business name: </span>
+                    {e.name}
+                  </li>
+                  <li>
+                    <span className="font-semibold">Description: </span>
+                    {e.description}
+                  </li>
+                  <li>
+                    <span className="font-semibold">E-mail: </span>
+                    {e.email}
+                  </li>
+                  <li>
+                    <span className="font-semibold">Phone Number: </span>
+                    {e.phone_number}
+                  </li>{" "}
+                </ul>
               </div>
               <div className="my-1">
                 <NavLink
                   to="/businesses/edit"
                   state={e}
-                  className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-700 font-medium rounded-md py-0.5 px-6"
+                  className="bg-teal-600/20 hover:bg-teal-600/30 text-teal-700 font-medium rounded-md py-1 text-center w-full block"
                 >
                   Edit
                 </NavLink>

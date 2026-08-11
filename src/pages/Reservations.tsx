@@ -4,6 +4,7 @@ import { TitleBar } from "../components/TitleBar";
 import { format } from "date-fns";
 import { NavLink } from "react-router-dom";
 import type { Reservation } from "../lib/definitions";
+import { _Link } from "../components/_Link";
 
 export function Reservations() {
   const isAuthenticated = useAuth();
@@ -78,12 +79,7 @@ export function Reservations() {
       <TitleBar title="Reservations" />
       <div className="px-3">
         <div className="text-left my-4 text-xs font-medium">
-          <NavLink
-            to="/reservations/new"
-            className="bg-sky-500/30 hover:bg-sky-500/40 text-sky-700 rounded-md py-0.5 px-2"
-          >
-            New Reservation
-          </NavLink>
+          <_Link text="Create new reservation" to="/reservations/new" />
         </div>
         <div className="flex gap-2 text-left my-4 text-xs font-medium">
           <input
@@ -91,7 +87,7 @@ export function Reservations() {
             name="startDate"
             type="date"
             onChange={(e) => setStartDate(new Date(e.target.value))}
-            className="border border-gray-200 rounded-md py-0.5 px-2"
+            className="border border-gray-200 bg-white rounded-md py-0.5 px-2"
           />
           <span className="py-1 font-semibold">to</span>
           <input
@@ -99,7 +95,7 @@ export function Reservations() {
             name="endDate"
             type="date"
             onChange={(e) => setEndDate(new Date(e.target.value))}
-            className="border border-gray-200 rounded-md py-0.5 px-2"
+            className="border border-gray-200 bg-white rounded-md py-0.5 px-2"
           />
           <button
             className="bg-cyan-600/30 hover:bg-cyan-600/40 text-cyan-700 rounded-md py-0.5 px-2"
@@ -113,45 +109,42 @@ export function Reservations() {
             .filter((e) => filterDate(e.date))
             .map((e) => (
               <div
-                className="text-xs border border-gray-200 bg-gray-50 px-3 py-3 rounded-md text-left flex gap-1 md:flex-row flex-col"
+                className="text-xs bg-white shadow px-4 py-4 rounded-md text-left flex flex-col gap-2"
                 key={e.id}
               >
-                <div className="flex-1">
-                  <h3 className="text-base font-semibold">
-                    {format(e.date, "dd-MM-yyyy | hh:mm aaaa")}
+                <div className="flex-1 flex items-center text-gray-600 font-bold">
+                  <h3 className="text-base font-semibold flex-1">
+                    {format(e.date, "dd-MM-yyyy@hh:mm aaaa")}
                   </h3>
-                  <dl>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">At:</dt>
-                      <dd>{e.location.name}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Reason:</dt>
-                      <dd>{e.reason}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Status:</dt>
-                      <dd className={getStatus(e.status)}>{e.status}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Slot:</dt>
-                      <dd>{e.slot}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Client:</dt>
-                      <dd>{e.client_name}</dd>
-                    </div>
-                  </dl>
+                  <div className="float-right">
+                    <p className={getStatus(e.status)}>{e.status}</p>
+                  </div>
                 </div>
-                <div className="my-1">
-                  <NavLink
-                    to="/reservations/edit"
-                    state={e}
-                    className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-700 font-medium rounded-md py-0.5 px-6"
-                  >
-                    Edit
-                  </NavLink>
-                </div>
+                <ul className="text-gray-600">
+                  <li>
+                    <span className="font-semibold">Location: </span>
+                    {e.location.name}
+                  </li>
+                  <li>
+                    <span className="font-semibold">Reason: </span>
+                    {e.reason}
+                  </li>
+                  <li>
+                    <span className="font-semibold">Slot: </span>
+                    <span>{e.slot}</span>
+                  </li>
+                  <li>
+                    <span className="font-semibold">Client: </span>
+                    <span>{e.client_name}</span>
+                  </li>
+                </ul>
+                <NavLink
+                  to="/reservations/edit"
+                  state={e}
+                  className="bg-teal-600/20 hover:bg-teal-600/30 text-teal-700 font-medium rounded-md py-1 text-center w-full block"
+                >
+                  Edit
+                </NavLink>
               </div>
             ))}
         </div>

@@ -5,7 +5,7 @@ export function Logout() {
 
   return (
     <button
-      className="py-0.5 px-2 text-sm bg-red-400 text-white font-semibold rounded-md hover:bg-red-500/90 hover:cursor-pointer"
+      className="py-1 px-1.5 text-xs bg-red-700/20 text-red-700 font-medium rounded-sm hover:bg-red-500/90 hover:cursor-pointer"
       onClick={logout}
     >
       Log out

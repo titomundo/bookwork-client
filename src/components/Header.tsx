@@ -9,12 +9,6 @@ export function Header() {
       >
         <span>Bookworm</span>
       </Link>
-      <Link
-        to="/profile"
-        className="py-1 px-3 inline font-semibold float-right rounded-md hover:bg-gray-400/40"
-      >
-        <span>Profile</span>
-      </Link>
     </header>
   );
 }

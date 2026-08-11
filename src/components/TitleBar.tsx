@@ -4,7 +4,7 @@ interface TitleBarProp {
 
 export function TitleBar({ title }: TitleBarProp) {
   return (
-    <div className="py-2 px-2 border-b border-b-gray-200">
+    <div className="py-2 px-2 border-b border-b-gray-200 bg-white">
       <h1 className="font-semibold text-left text-xl pl-1">{title}</h1>
     </div>
   );
