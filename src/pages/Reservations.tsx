@@ -74,7 +74,7 @@ export function Reservations() {
   }, [token]);
 
   return (
-    <div>
+    <>
       <TitleBar title="Reservations" />
       <div className="px-3">
         <div className="text-left my-4 text-xs font-medium">
@@ -123,6 +123,24 @@ export function Reservations() {
                   </h3>
                   <dl>
                     <div className="flex gap-2">
+                      <dt className="font-semibold">At:</dt>
+                      <dd>{e.location.name}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Reason:</dt>
+                      <dd>{e.reason}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Status:</dt>
+                      <dd className={getStatus(e.status)}>{e.status}</dd>
+                    </div>
+                    <div className="flex gap-2">
+                      <dt className="font-semibold">Slot:</dt>
+                      <dd>{e.slot}</dd>
+                    </div>
+                  </dl>
+                  <dl>
+                    <div className="flex gap-2">
                       <dt className="font-semibold">Client:</dt>
                       <dd>{e.client_name}</dd>
                     </div>
@@ -152,6 +170,6 @@ export function Reservations() {
             ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }

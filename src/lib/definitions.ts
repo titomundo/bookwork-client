@@ -6,7 +6,7 @@ export interface Reservation {
   reason: string;
   status: string;
   user_id: string;
-  location_id: string;
+  location: Location;
 }
 
 export interface Location {

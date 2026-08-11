@@ -25,10 +25,6 @@ export function CreateLocation() {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.msg) {
-            throw new Error(data.msg);
-          }
-
           setBusinesses(data);
         })
         .catch((error) => {
@@ -43,10 +39,12 @@ export function CreateLocation() {
     setErrors([]);
 
     const formData = new FormData(e.target);
-    const name = formData.get("name");
-    const capacity = parseInt(formData.get("capacity"));
-    const description = formData.get("description");
-    const business_id = formData.get("business_id");
+    const data = {
+      name: formData.get("name"),
+      capacity: parseInt(formData.get("capacity")),
+      description: formData.get("description"),
+      business_id: formData.get("business_id"),
+    };
 
     await fetch("http://127.0.0.1:5000/api/v1/locations/", {
       method: "POST",
@@ -55,12 +53,7 @@ export function CreateLocation() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        name,
-        capacity,
-        description,
-        business_id,
-      }),
+      body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then((data) => {

@@ -2,12 +2,15 @@ import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getFormErrors } from "../lib/getFormErrors";
 import type { Location } from "../lib/definitions";
+import type { FormError } from "../lib/definitions";
 
 export function CreateReservation() {
   const isAuthenticated = useAuth();
   const token = isAuthenticated ? localStorage.getItem("token") : null;
   const [locations, setLocations] = useState<Array<Location>>([]);
+  const [errors, setErrors] = useState<Array<FormError>>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,14 +23,17 @@ export function CreateReservation() {
           Authorization: `Bearer ${token}`,
         },
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(response.status);
-          } else {
-            return response.json();
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.msg) {
+            console.log(data.msg);
+          } else if (data.errors) {
+            setErrors(getFormErrors(data.errors));
+            return;
           }
+
+          setLocations(data);
         })
-        .then((data) => setLocations(data))
         .catch((error) => {
           console.log(error.message);
         });
@@ -35,10 +41,19 @@ export function CreateReservation() {
     fetchData();
   }, [token]);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
+    setErrors([]);
+
     const formData = new FormData(e.target);
-    console.log(formData);
+    const data = {
+      client_name: formData.get("client_name"),
+      reason: formData.get("reason"),
+      slot: parseInt(formData.get("slot"), 10),
+      date: formData.get("date"),
+      status: formData.get("status"),
+      location_id: formData.get("location_id"),
+    };
 
     await fetch("http://127.0.0.1:5000/api/v1/reservations/", {
       method: "POST",
@@ -47,18 +62,18 @@ export function CreateReservation() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        client_name: formData.get("client_name"),
-        reason: formData.get("reason"),
-        slot: parseInt(formData.get("slot"), 10),
-        date: formData.get("date"),
-        status: formData.get("status"),
-        location_id: formData.get("location_id"),
-      }),
+      body: JSON.stringify(data),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.status);
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.msg) {
+          console.log(data.msg);
+        } else if (data.errors) {
+          setErrors(getFormErrors(data.errors));
+          return;
+        } else if (data.error) {
+          setErrors(getFormErrors([data.error]));
+          return;
         }
 
         navigate("/reservations");
@@ -80,6 +95,14 @@ export function CreateReservation() {
             Return to list
           </NavLink>
         </div>
+        <ul className="text-xs text-red-700">
+          {errors.map((e) => (
+            <li key={e.name} className="bg-red-500/30 px-1 rounded-sm w-fit mb-1">
+              <span>{e.name}: </span>
+              {e.msg}
+            </li>
+          ))}
+        </ul>
         <form
           className="w-lg my-4 text-left flex flex-col gap-2 text-sm "
           onSubmit={handleSubmit}
