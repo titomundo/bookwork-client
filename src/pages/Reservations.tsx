@@ -32,7 +32,7 @@ export function Reservations() {
   }
 
   function getStatus(status: string) {
-    const base = " rounded-md font-medium py-0 px-2 capitalize";
+    const base = " rounded-sm font-medium py-0 px-1 capitalize";
     switch (status) {
       case "pending":
         return "bg-green-500/30 hover:bg-green-500/40 text-green-700" + base;
@@ -109,12 +109,12 @@ export function Reservations() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
           {reservations
             .filter((e) => filterDate(e.date))
             .map((e) => (
               <div
-                className="text-xs border border-gray-200 px-3 py-3 rounded-md text-left flex gap-1 md:flex-row flex-col"
+                className="text-xs border border-gray-200 bg-gray-50 px-3 py-3 rounded-md text-left flex gap-1 md:flex-row flex-col"
                 key={e.id}
               >
                 <div className="flex-1">
@@ -144,17 +144,14 @@ export function Reservations() {
                     </div>
                   </dl>
                 </div>
-                <div className="grid grid-row-2 xs:grid-cols-2 gap-1 p-0.5">
+                <div className="my-1">
                   <NavLink
                     to="/reservations/edit"
                     state={e}
-                    className="bg-lime-600/30 hover:bg-lime-600/40 text-lime-700 font-medium rounded-md py-0.5 px-6"
+                    className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-700 font-medium rounded-md py-0.5 px-6"
                   >
                     Edit
                   </NavLink>
-                  <button className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-600 font-medium rounded-md py-0.5 px-6">
-                    Close
-                  </button>
                 </div>
               </div>
             ))}
