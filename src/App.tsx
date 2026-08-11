@@ -15,6 +15,7 @@ import { CreateLocation } from "./pages/CreateLocation";
 import { CreateReservation } from "./pages/CreateReservation";
 import { EditReservation } from "./pages/EditReservation";
 import { EditLocation } from "./pages/EditLocation";
+import { EditBusiness } from "./pages/EditBusiness";
 
 const App = () => {
   return (
@@ -38,6 +39,9 @@ const App = () => {
             <Route path="/businesses/new" element={<ProtectedRoute />}>
               <Route path="" element={<CreateBusinesses />}></Route>
             </Route>
+            <Route path="/businesses/edit" element={<ProtectedRoute />}>
+              <Route path="" element={<EditBusiness/>}></Route>
+            </Route>
 
             <Route path="/locations" element={<ProtectedRoute />}>
               <Route path="" element={<Locations />}></Route>
@@ -46,7 +50,7 @@ const App = () => {
               <Route path="" element={<CreateLocation />}></Route>
             </Route>
             <Route path="/locations/edit" element={<ProtectedRoute />}>
-              <Route path="" element={<EditLocation/>}></Route>
+              <Route path="" element={<EditLocation />}></Route>
             </Route>
 
             <Route path="/reservations" element={<ProtectedRoute />}>
