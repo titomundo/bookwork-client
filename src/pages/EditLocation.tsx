@@ -60,7 +60,7 @@ export function EditLocation() {
       <div className="px-4 text-left">
         <div className="my-4 text-xs">
           <NavLink
-            to="/reservations/"
+            to="/locations/"
             className="bg-yellow-500/30 hover:bg-yellow-500/40 text-yellow-700 font-medium rounded-md py-0.5 px-2"
           >
             Return to list
