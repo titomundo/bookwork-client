@@ -14,6 +14,7 @@ import { CreateBusinesses } from "./pages/CreateBusiness";
 import { CreateLocation } from "./pages/CreateLocation";
 import { CreateReservation } from "./pages/CreateReservation";
 import { EditReservation } from "./pages/EditReservation";
+import { EditLocation } from "./pages/EditLocation";
 
 const App = () => {
   return (
@@ -43,6 +44,9 @@ const App = () => {
             </Route>
             <Route path="/locations/new" element={<ProtectedRoute />}>
               <Route path="" element={<CreateLocation />}></Route>
+            </Route>
+            <Route path="/locations/edit" element={<ProtectedRoute />}>
+              <Route path="" element={<EditLocation/>}></Route>
             </Route>
 
             <Route path="/reservations" element={<ProtectedRoute />}>

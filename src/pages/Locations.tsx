@@ -47,15 +47,37 @@ export function Locations() {
             New Location
           </NavLink>
         </div>
-        <div className="flex gap-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
           {locations.map((e) => (
             <div
-              className="text-sm bg-gray-100 border border-gray-200 px-3 py-3 rounded-md text-left"
+              className="text-xs border border-gray-200 bg-gray-50 px-3 py-3 rounded-md text-left flex gap-1 md:flex-row flex-col"
               key={e.id}
             >
-              <h3 className="font-semibold">{e.name}</h3>
-              <p>{`Description: ${e.description}`}</p>
-              <p>{`Capacity: ${e.capacity}`}</p>
+              <div className="flex-1">
+                <dl>
+                  <div className="flex gap-2">
+                    <dt className="font-semibold">Name:</dt>
+                    <dd>{e.name}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="font-semibold">Description:</dt>
+                    <dd>{e.description}</dd>
+                  </div>
+                  <div className="flex gap-2">
+                    <dt className="font-semibold">Capacity:</dt>
+                    <dd>{e.capacity}</dd>
+                  </div>
+                </dl>
+              </div>
+              <div className="my-1">
+                <NavLink
+                  to="/locations/edit"
+                  state={e}
+                  className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-700 font-medium rounded-md py-0.5 px-6"
+                >
+                  Edit
+                </NavLink>
+              </div>
             </div>
           ))}
         </div>
