@@ -13,6 +13,7 @@ import { Users } from "./pages/Users";
 import { CreateBusinesses } from "./pages/CreateBusiness";
 import { CreateLocation } from "./pages/CreateLocation";
 import { CreateReservation } from "./pages/CreateReservation";
+import { EditReservation } from "./pages/EditReservation";
 
 const App = () => {
   return (
@@ -49,6 +50,9 @@ const App = () => {
             </Route>
             <Route path="/reservations/new" element={<ProtectedRoute />}>
               <Route path="" element={<CreateReservation />}></Route>
+            </Route>
+            <Route path="/reservations/edit" element={<ProtectedRoute />}>
+              <Route path="" element={<EditReservation />}></Route>
             </Route>
 
             <Route path="/users" element={<ProtectedRoute />}>

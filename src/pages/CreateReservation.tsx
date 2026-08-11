@@ -97,7 +97,10 @@ export function CreateReservation() {
         </div>
         <ul className="text-xs text-red-700">
           {errors.map((e) => (
-            <li key={e.name} className="bg-red-500/30 px-1 rounded-sm w-fit mb-1">
+            <li
+              key={e.name}
+              className="bg-red-500/30 px-1 rounded-sm w-fit mb-1"
+            >
               <span>{e.name}: </span>
               {e.msg}
             </li>

@@ -138,30 +138,20 @@ export function Reservations() {
                       <dt className="font-semibold">Slot:</dt>
                       <dd>{e.slot}</dd>
                     </div>
-                  </dl>
-                  <dl>
                     <div className="flex gap-2">
                       <dt className="font-semibold">Client:</dt>
                       <dd>{e.client_name}</dd>
                     </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Reason:</dt>
-                      <dd>{e.reason}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Status:</dt>
-                      <dd className={getStatus(e.status)}>{e.status}</dd>
-                    </div>
-                    <div className="flex gap-2">
-                      <dt className="font-semibold">Slot:</dt>
-                      <dd>{e.slot}</dd>
-                    </div>
                   </dl>
                 </div>
                 <div className="grid grid-row-2 xs:grid-cols-2 gap-1 p-0.5">
-                  <button className="bg-lime-600/30 hover:bg-lime-600/40 text-lime-700 font-medium rounded-md py-0.5 px-6">
+                  <NavLink
+                    to="/reservations/edit"
+                    state={e}
+                    className="bg-lime-600/30 hover:bg-lime-600/40 text-lime-700 font-medium rounded-md py-0.5 px-6"
+                  >
                     Edit
-                  </button>
+                  </NavLink>
                   <button className="bg-stone-600/30 hover:bg-stone-600/40 text-stone-600 font-medium rounded-md py-0.5 px-6">
                     Close
                   </button>
