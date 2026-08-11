@@ -32,3 +32,8 @@ export interface User {
   is_admin: boolean;
   email: string;
 }
+
+export interface FormError {
+  name?: string;
+  msg?: string;
+}

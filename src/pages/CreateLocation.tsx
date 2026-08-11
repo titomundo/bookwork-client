@@ -1,13 +1,17 @@
 import { useAuth } from "../utils/AuthContext";
 import { TitleBar } from "../components/TitleBar";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getFormErrors } from "../lib/getFormErrors";
 import type { Business } from "../lib/definitions";
+import type { FormError } from "../lib/definitions";
 
 export function CreateLocation() {
   const isAuthenticated = useAuth();
   const token = isAuthenticated ? localStorage.getItem("token") : null;
   const [businesses, setBusinesses] = useState<Array<Business>>([]);
+  const [errors, setErrors] = useState<Array<FormError>>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -22,8 +26,7 @@ export function CreateLocation() {
         .then((response) => response.json())
         .then((data) => {
           if (data.msg) {
-            console.log("Invalid credentials");
-            return;
+            throw new Error(data.msg);
           }
 
           setBusinesses(data);
@@ -35,10 +38,15 @@ export function CreateLocation() {
     fetchData();
   }, [token]);
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.SubmitEvent) {
     e.preventDefault();
+    setErrors([]);
+
     const formData = new FormData(e.target);
-    console.log(formData);
+    const name = formData.get("name");
+    const capacity = parseInt(formData.get("capacity"));
+    const description = formData.get("description");
+    const business_id = formData.get("business_id");
 
     await fetch("http://127.0.0.1:5000/api/v1/locations/", {
       method: "POST",
@@ -48,24 +56,25 @@ export function CreateLocation() {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        name: formData.get("name"),
-        capacity: parseInt(formData.get("capacity"), 10),
-        description: formData.get("description"),
-        business_id: formData.get("business_id"),
+        name,
+        capacity,
+        description,
+        business_id,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        } else {
-          return response.json();
-        }
-      })
+      .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        if (data.msg) {
+          console.log(data.msg);
+        } else if (data.errors) {
+          setErrors(getFormErrors(data.errors));
+          return;
+        }
+
+        navigate("/reservations");
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error);
       });
   }
 
@@ -81,6 +90,14 @@ export function CreateLocation() {
             Return to list
           </NavLink>
         </div>
+        <ul className="text-xs text-red-700">
+          {errors.map((e) => (
+            <li className="bg-red-500/30 px-1 rounded-sm w-fit mb-1">
+              <span>{e.name}: </span>
+              {e.msg}
+            </li>
+          ))}
+        </ul>
         <form
           className="w-lg my-4 text-left flex flex-col gap-2 text-sm "
           onSubmit={handleSubmit}
@@ -113,7 +130,7 @@ export function CreateLocation() {
           </div>
           <div className="flex flex-col">
             <label className="font-medium ml-0.5" htmlFor="business">
-              Description:
+              Business:
             </label>
             <select
               name="business_id"
