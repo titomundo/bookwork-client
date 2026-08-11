@@ -6,11 +6,11 @@ export function Layout() {
   return (
     <div className="w-full flex flex-col h-screen">
       {/* <Header /> */}
-      <main className="flex w-full flex-1 text-gray-700">
+      <main className="flex w-full h-full flex-1 text-gray-700">
         <div className="flex-none">
           <Sidebar />
         </div>
-        <div className="w-full h-full">
+        <div className="w-full h-screen overflow-y-auto">
           <Outlet />
         </div>
       </main>

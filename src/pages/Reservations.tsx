@@ -108,7 +108,6 @@ export function Reservations() {
             Clear filter
           </button>
         </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
           {reservations
             .filter((e) => filterDate(e.date))
