@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 type AuthContextType = {
   isAuthenticated: boolean;
-  user: { name?: string } | null;
-  isAdmin: boolean;
+  role: string | null;
   login: (email: string, password: string) => void;
   logout: () => void;
 };
@@ -16,9 +16,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("token") ? true : false,
   );
-
-  const [user, setUser] = useState<{ name?: string } | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [role, setRole] = useState(null);
 
   const login = async (email: string, password: string) => {
     await fetch("http://127.0.0.1:5000/api/v1/auth/login", {
@@ -37,23 +35,21 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }
 
         localStorage.setItem("token", data.access_token);
+        const decoded = jwtDecode(data.access_token);
+        setRole(decoded.role);
         setIsAuthenticated(true);
-        setIsAdmin(true);
-        setUser({ name: "user" });
       });
   };
 
   const logout = () => {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
-    setIsAdmin(false);
-    setUser(null);
+    setRole(null);
   };
 
   const value: AuthContextType = {
     isAuthenticated,
-    isAdmin,
-    user,
+    role,
     login,
     logout,
   };
