@@ -52,7 +52,7 @@ export function Profile() {
               </li>
               <li>
                 <span className="font-semibold">Role: </span>
-                {user.is_admin ? "Admin" : "Employee"}
+                {user.role}
               </li>
             </ul>
           </div>
