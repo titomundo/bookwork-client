@@ -13,7 +13,7 @@ export default function Login() {
     login(email, password);
 
     if (isAuthenticated) {
-      navigate("/dashboard");
+      navigate("/businesses");
     }
   };
 
