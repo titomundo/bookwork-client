@@ -5,7 +5,6 @@ import { useAuth } from "../utils/AuthContext";
 
 export function Layout() {
   const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
 
   return (
     <div className="w-full flex flex-col h-screen">
